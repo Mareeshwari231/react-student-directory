@@ -1,42 +1,15 @@
-window.onload = () => {
-    alert("Welcome to City Health Clinic!");
-};
-window.onload = () => {
-    alert("Welcome to Doctor Booking!");
-};
-document.getElementById("appointmentForm")?.addEventListener("submit", function(e) {
-    e.preventDefault();
-    document.getElementById("clickBtn")?.addEventListener("click", () => {
-    let section = document.getElementById("colorSection");
-    section.style.backgroundColor = "#ffeb3b";
-    section.innerText = "You clicked the button!";
-});
+import greetUser, { validatePhone, validateEmail, isSunday, formatAppointment } from './appointmentUtils.js';
 
+// Test data
+const name = "Mareeshwari";
+const email = "mareeshwari@example.com";
+const phone = "9876543210";
+const doctor = "Smith";
+const date = "2025-08-20";
+const time = "10:00 AM";
 
-    let name = document.getElementById("name").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let doctor = document.getElementById("doctor").value;
-    let date = document.getElementById("date").value;
-    let time = document.getElementById("time").value;
-
-    if (!name || !email || !phone || !doctor || !date || !time) {
-        alert("All fields are required!");
-        return;
-    }
-
-    let phonePattern = /^[0-9]{10}$/;
-    if (!phonePattern.test(phone)) {
-        alert("Phone number must be exactly 10 digits!");
-        return;
-    }
-
-    let selectedDate = new Date(date);
-    if (selectedDate.getDay() === 0) {
-        alert("No bookings allowed on Sundays!");
-        return;
-    }
-
-    // Redirect to confirmation page
-    window.location.href = "confirmation.html";
-});
+console.log(greetUser(name));
+console.log("Valid email:", validateEmail(email));
+console.log("Valid phone:", validatePhone(phone));
+console.log("Appointment is not on Sunday:", !isSunday(date));
+console.log("Formatted:", formatAppointment(name, doctor, date, time));
